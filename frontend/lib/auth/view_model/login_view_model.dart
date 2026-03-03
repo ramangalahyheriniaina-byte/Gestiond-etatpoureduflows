@@ -44,30 +44,35 @@ class LoginViewModel extends ChangeNotifier {
 
       await Future.delayed(const Duration(milliseconds: 100));
 
-      // Redirection avec passage des paramètres utilisateur
+      // CORRECTION: Utiliser name au lieu de username
+      final userName = user.name.isNotEmpty ? user.name : 'Utilisateur';
+
       if (role == 'admin') {
-        Navigator.of(context).pushReplacementNamed(
-          '/admin',
-          arguments: {
-            'userId': user.id.toString(),
-            'userName': user.name ?? user.username,
-          },
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (context) => MainLayout(
+              userId: user.id.toString(),
+              userName: userName,
+            ),
+          ),
         );
       } else if (role == 'prof') {
-        Navigator.of(context).pushReplacementNamed(
-          '/prof/home',
-          arguments: {
-            'userId': user.id.toString(),
-            'userName': user.name ?? user.username,
-          },
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (context) => MainLayout(
+              userId: user.id.toString(),
+              userName: userName,
+            ),
+          ),
         );
       } else if (role == 'etudiant') {
-        Navigator.of(context).pushReplacementNamed(
-          '/etudiant/home',
-          arguments: {
-            'userId': user.id.toString(),
-            'userName': user.name ?? user.username,
-          },
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (context) => MainLayout(
+              userId: user.id.toString(),
+              userName: userName,
+            ),
+          ),
         );
       } else {
         throw Exception("Rôle utilisateur inconnu: $role");

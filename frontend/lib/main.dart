@@ -34,25 +34,54 @@ class EduFlowApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'EduFlow',
-
-      // Routes
       initialRoute: '/welcome',
+
+      // Utilisation de onGenerateRoute pour gérer les paramètres
+      onGenerateRoute: (settings) {
+        // Route welcome
+        if (settings.name == '/welcome') {
+          return MaterialPageRoute(
+            builder: (context) => const WelcomeView(),
+          );
+        }
+
+        // Route login
+        if (settings.name == '/') {
+          return MaterialPageRoute(
+            builder: (context) => const LoginScreen(),
+          );
+        }
+
+        // Routes admin avec paramètres
+        if (settings.name == '/admin' ||
+            settings.name == '/prof/home' ||
+            settings.name == '/etudiant/home') {
+
+          // Récupérer les arguments passés
+          final args = settings.arguments as Map<String, String>?;
+
+          return MaterialPageRoute(
+            builder: (context) => MainLayout(
+              userId: args?['userId'] ?? '',
+              userName: args?['userName'] ?? '',
+            ),
+          );
+        }
+
+        // Route par défaut
+        return MaterialPageRoute(
+          builder: (context) => const Scaffold(
+            body: Center(
+              child: Text('Route non trouvée'),
+            ),
+          ),
+        );
+      },
+
+      // Garder routes pour la compatibilité
       routes: {
         '/welcome': (context) => const WelcomeView(),
         '/': (context) => const LoginScreen(),
-        // CORRECTION: Ajout des paramètres requis pour MainLayout
-        '/admin': (context) => const MainLayout(
-          userId: '',
-          userName: '',
-        ),
-        '/prof/home': (context) => const MainLayout(
-          userId: '',
-          userName: '',
-        ),
-        '/etudiant/home': (context) => const MainLayout(
-          userId: '',
-          userName: '',
-        ),
       },
     );
   }

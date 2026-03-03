@@ -11,7 +11,7 @@ class CoursService {
   // ========== COURS ==========
   Future<List<Cours>> getAllCours({int skip = 0, int limit = 100, bool includeRelations = true}) async {
     try {
-      print(' GET /cours?skip=$skip&limit=$limit');
+      print('GET /cours?skip=$skip&limit=$limit');
       Map<String, String> queryParams = {
         'skip': skip.toString(),
         'limit': limit.toString(),
@@ -40,7 +40,7 @@ class CoursService {
       if (response is Map && response.isEmpty) return [];
       throw Exception('Format de réponse inattendu pour /cours');
     } catch (e) {
-      print(' Erreur getAllCours: $e');
+      print('Erreur getAllCours: $e');
       rethrow;
     }
   }
@@ -60,7 +60,7 @@ class CoursService {
             coursList.add(Cours.fromJson(jsonMap));
           }
         } catch (e) {
-          print(' Skipping invalid cours item: $e');
+          print('Skipping invalid cours item: $e');
         }
       }
     }
@@ -80,7 +80,7 @@ class CoursService {
       }
       throw Exception('Format inattendu pour cours by id');
     } catch (e) {
-      print(' Erreur getCoursById: $e');
+      print('Erreur getCoursById: $e');
       rethrow;
     }
   }
@@ -91,7 +91,7 @@ class CoursService {
       if (response is List) return _parseCoursList(response);
       throw Exception('Format inattendu pour cours par prof');
     } catch (e) {
-      print(' Erreur getCoursByProf: $e');
+      print('Erreur getCoursByProf: $e');
       rethrow;
     }
   }
@@ -102,7 +102,7 @@ class CoursService {
       if (response is List) return _parseCoursList(response);
       throw Exception('Format inattendu pour cours par matiere');
     } catch (e) {
-      print(' Erreur getCoursByMatiere: $e');
+      print('Erreur getCoursByMatiere: $e');
       rethrow;
     }
   }
@@ -126,7 +126,7 @@ class CoursService {
       }
       throw Exception('Format inattendu après création');
     } catch (e) {
-      print(' Erreur createCours: $e');
+      print('Erreur createCours: $e');
       rethrow;
     }
   }
@@ -149,7 +149,7 @@ class CoursService {
       }
       throw Exception('Format inattendu après update');
     } catch (e) {
-      print(' Erreur updateCours: $e');
+      print('Erreur updateCours: $e');
       rethrow;
     }
   }
@@ -158,7 +158,7 @@ class CoursService {
     try {
       await _api.delete('/cours/$id');
     } catch (e) {
-      print(' Erreur deleteCours: $e');
+      print('Erreur deleteCours: $e');
       rethrow;
     }
   }
@@ -195,7 +195,7 @@ class CoursService {
       }
       return [];
     } catch (e) {
-      print(' Erreur getAllMatieres: $e');
+      print('Erreur getAllMatieres: $e');
       rethrow;
     }
   }
@@ -214,9 +214,7 @@ class CoursService {
             });
             matieres.add(Matiere.fromJson(jsonMap));
           }
-        } catch (e) {
-          print(' Skipping invalid matiere: $e');
-        }
+        } catch (_) {}
       }
     }
     return matieres;
@@ -235,7 +233,7 @@ class CoursService {
       }
       throw Exception('Format inattendu pour matiere by id');
     } catch (e) {
-      print(' Erreur getMatiereById: $e');
+      print('Erreur getMatiereById: $e');
       rethrow;
     }
   }
@@ -258,8 +256,23 @@ class CoursService {
       }
       throw Exception('Format inattendu après création matiere');
     } catch (e) {
-      print(' Erreur createMatiere: $e');
+      print('Erreur createMatiere: $e');
       rethrow;
+    }
+  }
+
+  Future<List<Matiere>> getMatieresByClasse(int classeId) async {
+    try {
+      final response = await _api.get('/matieres/classe/$classeId');
+      if (response is List) return _parseMatieresList(response);
+      if (response is Map && response.containsKey('data')) {
+        final data = response['data'];
+        if (data is List) return _parseMatieresList(data);
+      }
+      return [];
+    } catch (e) {
+      print('Erreur getMatieresByClasse: $e');
+      return [];
     }
   }
 
@@ -277,7 +290,7 @@ class CoursService {
       }
       return [];
     } catch (e) {
-      print(' Erreur getAllProfs: $e');
+      print('Erreur getAllProfs: $e');
       rethrow;
     }
   }
@@ -296,9 +309,7 @@ class CoursService {
             });
             profs.add(Prof.fromJson(jsonMap));
           }
-        } catch (e) {
-          print(' Skipping invalid prof: $e');
-        }
+        } catch (_) {}
       }
     }
     return profs;
@@ -317,7 +328,7 @@ class CoursService {
       }
       throw Exception('Format inattendu pour prof by id');
     } catch (e) {
-      print(' Erreur getProfById: $e');
+      print('Erreur getProfById: $e');
       rethrow;
     }
   }
@@ -339,7 +350,7 @@ class CoursService {
       }
       throw Exception('Format inattendu après création prof');
     } catch (e) {
-      print(' Erreur createProf: $e');
+      print('Erreur createProf: $e');
       rethrow;
     }
   }
@@ -348,7 +359,7 @@ class CoursService {
     try {
       await _api.delete('/professeurs/$id');
     } catch (e) {
-      print(' Erreur deleteProf: $e');
+      print('Erreur deleteProf: $e');
       rethrow;
     }
   }
@@ -370,7 +381,7 @@ class CoursService {
       }
       throw Exception('Format inattendu après update prof');
     } catch (e) {
-      print(' Erreur updateProf: $e');
+      print('Erreur updateProf: $e');
       rethrow;
     }
   }
@@ -383,8 +394,9 @@ class CoursService {
         'limit': limit.toString(),
       });
       List<Classe> classes = [];
-      if (response is List) classes = _parseClassesList(response);
-      else if (response is Map && response.containsKey('data')) {
+      if (response is List) {
+        classes = _parseClassesList(response);
+      } else if (response is Map && response.containsKey('data')) {
         final data = response['data'];
         if (data is List) classes = _parseClassesList(data);
       }
@@ -392,11 +404,13 @@ class CoursService {
         try {
           final matieres = await getMatieresByClasse(classe.idClasse!);
           classe.matieres = matieres;
-        } catch (_) {}
+        } catch (e) {
+          print('Erreur chargement matières pour ${classe.nomClasse}: $e');
+        }
       }
       return classes;
     } catch (e) {
-      print(' Erreur getAllClasses: $e');
+      print('Erreur getAllClasses: $e');
       rethrow;
     }
   }
@@ -406,8 +420,9 @@ class CoursService {
     if (list is List) {
       for (var item in list) {
         try {
-          if (item is Map<String, dynamic>) classes.add(Classe.fromJson(item));
-          else if (item is Map) {
+          if (item is Map<String, dynamic>) {
+            classes.add(Classe.fromJson(item));
+          } else if (item is Map) {
             final Map<String, dynamic> jsonMap = {};
             item.forEach((key, value) {
               jsonMap[key.toString()] = value;
@@ -433,14 +448,16 @@ class CoursService {
       }
       throw Exception('Format inattendu pour classe by id');
     } catch (e) {
-      print(' Erreur getClasseById: $e');
+      print('Erreur getClasseById: $e');
       rethrow;
     }
   }
 
   Future<Classe> createClasse(Classe classe) async {
     try {
-      final data = {'nom_classe': classe.nomClasse};
+      final data = {
+        'nom_classe': classe.nomClasse,
+      };
       final response = await _api.post('/classes', data);
       if (response is Map<String, dynamic>) return Classe.fromJson(response);
       if (response is Map) {
@@ -452,7 +469,7 @@ class CoursService {
       }
       throw Exception('Format inattendu après création classe');
     } catch (e) {
-      print(' Erreur createClasse: $e');
+      print('Erreur createClasse: $e');
       rethrow;
     }
   }
@@ -471,7 +488,7 @@ class CoursService {
       }
       return [];
     } catch (e) {
-      print(' Erreur getAllAnneeScolaires: $e');
+      print('Erreur getAllAnneeScolaires: $e');
       rethrow;
     }
   }
@@ -481,8 +498,9 @@ class CoursService {
     if (list is List) {
       for (var item in list) {
         try {
-          if (item is Map<String, dynamic>) annees.add(AnneeScolaire.fromJson(item));
-          else if (item is Map) {
+          if (item is Map<String, dynamic>) {
+            annees.add(AnneeScolaire.fromJson(item));
+          } else if (item is Map) {
             final Map<String, dynamic> jsonMap = {};
             item.forEach((key, value) {
               jsonMap[key.toString()] = value;
@@ -508,54 +526,55 @@ class CoursService {
       }
       throw Exception('Format inattendu pour année scolaire by id');
     } catch (e) {
-      print(' Erreur getAnneeScolaireById: $e');
+      print('Erreur getAnneeScolaireById: $e');
       rethrow;
     }
   }
 
-  // ========== MATIÈRES PAR CLASSE ==========
-  Future<List<Matiere>> getMatieresByClasse(int classeId) async {
+  Future<AnneeScolaire> createAnneeScolaire(AnneeScolaire annee) async {
     try {
-      print(' GET /matieres/classe/$classeId');
-      final response = await _api.get('/matieres/classe/$classeId');
-      if (response is List) return _parseMatieresList(response);
-      if (response is Map && response.containsKey('data')) {
-        final data = response['data'];
-        if (data is List) return _parseMatieresList(data);
-      }
-      return [];
-    } catch (e) {
-      print(' Erreur getMatieresByClasse: $e');
-      return [];
-    }
-  }
-
-  // ========== SETUP STATUS ==========
-  Future<Map<String, dynamic>> getSetupStatus() async {
-    try {
-      print('Vérification statut initialisation...');
-      final response = await _api.get('/setup/status');
-      if (response is Map<String, dynamic>) return response;
-      if (response is Map) {
+      print('POST /annees-scolaires');
+      final data = {
+        'start_year': annee.startYear,
+        'end_year': annee.endYear,
+        'is_active': annee.isActive,
+      };
+      final response = await _api.post('/annees-scolaires', data);
+      if (response is Map<String, dynamic>) {
+        return AnneeScolaire.fromJson(response);
+      } else if (response is Map) {
         final Map<String, dynamic> jsonMap = {};
         (response as Map).forEach((key, value) {
           jsonMap[key.toString()] = value;
         });
-        return jsonMap;
+        return AnneeScolaire.fromJson(jsonMap);
       }
-      throw Exception('Format de réponse inattendu pour setup/status');
+      throw Exception('Format inattendu après création annee');
     } catch (e) {
-      print('Erreur getSetupStatus: $e');
+      print('Erreur createAnneeScolaire: $e');
       rethrow;
     }
   }
 
+  // ========== SETUP STATUS ==========
   Future<bool> isSetupComplete() async {
     try {
-      final status = await getSetupStatus();
-      return status['is_initialized'] == true;
+      print('Vérification statut initialisation...');
+      final response = await _api.get('/setup/status');
+
+      if (response is Map<String, dynamic>) {
+        return response['is_initialized'] == true;
+      } else if (response is Map) {
+        final Map<String, dynamic> jsonMap = {};
+        (response as Map).forEach((key, value) {
+          jsonMap[key.toString()] = value;
+        });
+        return jsonMap['is_initialized'] == true;
+      }
+
+      return false;
     } catch (e) {
-      print('Erreur vérification setup: $e');
+      print('Erreur isSetupComplete: $e');
       return false;
     }
   }
