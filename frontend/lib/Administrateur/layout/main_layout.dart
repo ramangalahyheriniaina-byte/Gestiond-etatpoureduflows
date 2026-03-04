@@ -44,21 +44,26 @@ class _MainLayoutState extends State<MainLayout> {
     });
   }
 
-  // NOUVELLE MÉTHODE: Vérification intelligente du setup
+  // Force la mise à jour de la navigation
+  void _forceNavigationRefresh() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) {
+        setState(() {});
+      }
+    });
+  }
+
+  // Vérification intelligente du setup
   Future<void> _checkSetupStatus() async {
     final coursVM = context.read<CoursViewModel>();
 
     try {
-      // Réinitialiser l'état de vérification
       coursVM.resetSetupCheck();
-
-      // Vérifier si le système a besoin de configuration
       final needsSetup = await coursVM.checkIfSetupNeeded();
 
       if (!mounted) return;
 
       if (needsSetup) {
-        // Cas 1: Système non configuré -> besoin d'initialisation
         setState(() {
           _needsInitialization = true;
           _needsUpload = false;
@@ -66,9 +71,8 @@ class _MainLayoutState extends State<MainLayout> {
           _isLoading = false;
           _isCheckingSetup = false;
         });
-        print('🟡 Système non configuré, redirection vers initialisation');
+        print('Système non configuré, redirection vers initialisation');
       } else {
-        // Cas 2: Système déjà configuré -> charger les données
         if (!coursVM.isInitialized) {
           await coursVM.loadInitialData();
         }
@@ -82,13 +86,14 @@ class _MainLayoutState extends State<MainLayout> {
           _isLoading = false;
           _isCheckingSetup = false;
         });
-        print('🟢 Système déjà configuré, affichage du dashboard');
+
+        _forceNavigationRefresh();
+        print('Système déjà configuré, affichage du dashboard');
       }
     } catch (e) {
-      print('❌ Erreur vérification setup: $e');
+      print('Erreur vérification setup: $e');
       if (!mounted) return;
-      
-      // En cas d'erreur, on préfère passer par l'initialisation
+
       setState(() {
         _needsInitialization = true;
         _isLoading = false;
@@ -102,19 +107,26 @@ class _MainLayoutState extends State<MainLayout> {
       _needsInitialization = false;
       _needsUpload = true;
     });
+    _forceNavigationRefresh();
   }
 
   void _onUploadComplete() {
     final coursVM = context.read<CoursViewModel>();
+    final navVM = context.read<NavigationViewModel>(); // AJOUT
+
     setState(() {
       _needsUpload = false;
       _anneeEnCours = coursVM.anneeScolaire?.displayName;
     });
-    
-    // Afficher un message de succès
+
+    // FORCER LA NAVIGATION VERS LA LISTE DES COURS
+    navVM.setCurrentRoute(Routes.cours);
+
+    _forceNavigationRefresh();
+
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
-        content: Text('✅ Configuration terminée avec succès!'),
+        content: Text('Configuration terminée avec succès!'),
         backgroundColor: Colors.green,
         duration: Duration(seconds: 2),
       ),
@@ -149,21 +161,19 @@ class _MainLayoutState extends State<MainLayout> {
   }
 
   void _performLogout() {
-    // Reset du ViewModel
     final coursVM = context.read<CoursViewModel>();
     coursVM.reset();
-    coursVM.resetSetupCheck(); // Important: reset aussi le flag de vérification
+    coursVM.resetSetupCheck();
 
-    // Navigation vers login
     Navigator.of(context).pushAndRemoveUntil(
       MaterialPageRoute(builder: (context) => const LoginScreen()),
-      (route) => false,
+          (route) => false,
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    // Écran de chargement pendant la vérification du setup
+    // Écran de chargement
     if (_isLoading || _isCheckingSetup) {
       return Scaffold(
         body: Center(
@@ -207,40 +217,32 @@ class _MainLayoutState extends State<MainLayout> {
       }
     });
 
-    // DÉTERMINATION DU CONTENU À AFFICHER
+    // ========== SOLUTION : DÉTERMINATION DU CONTENU À AFFICHER ==========
     Widget content;
-    
+
     if (_needsInitialization) {
-      // ÉTAPE 1: Initialisation (année scolaire + classes)
       print('📋 Affichage: Initialisation');
       content = CoursInitView(onComplete: _onInitializationComplete);
     } else if (_needsUpload) {
-      // ÉTAPE 2: Upload PDF (matières)
       print('📤 Affichage: Upload PDF');
       content = UploadProgrammeView(onComplete: _onUploadComplete);
     } else {
-      // ÉTAPE 3: Navigation normale
-      print('🖥️ Affichage: Navigation normale - ${navVM.currentRoute}');
-      
-      // Si on est sur la route des cours mais que le système n'est pas configuré,
-      // on redirige vers l'initialisation
-      if (navVM.currentRoute == Routes.cours && coursVM.needsSetup) {
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-          navVM.setCurrentRoute(Routes.dashboard);
-        });
-        content = const DashboardView();
-      } else {
-        switch (navVM.currentRoute) {
-          case Routes.programme:
-            content = EdtView();
-            break;
-          case Routes.dashboard:
-            content = const DashboardView();
-            break;
-          case Routes.cours:
-          default:
-            content = const CoursListView();
-        }
+      print('🖥️ Navigation normale - Route: ${navVM.currentRoute}');
+
+      switch (navVM.currentRoute) {
+        case Routes.programme:
+          content = EdtView();
+          break;
+        case Routes.dashboard:
+          content = const DashboardView();
+          break;
+        case Routes.cours:
+        // SOLUTION SIMPLE : TOUJOURS ALLER VERS LISTE VIEW
+          print('📋 Navigation vers CoursListView');
+          content = const CoursListView();
+          break;
+        default:
+          content = const DashboardView();
       }
     }
 
@@ -261,7 +263,7 @@ class _MainLayoutState extends State<MainLayout> {
   }
 }
 
-// ========== SIDEBAR AMÉLIORÉE ==========
+// ========== Sidebar améliorée ==========
 class SidebarWithYear extends StatelessWidget {
   final String? anneeEnCours;
   final String userName;
@@ -363,7 +365,7 @@ class SidebarWithYear extends StatelessWidget {
                     ),
                   ),
                 ],
-                
+
                 // Indicateur de statut de configuration
                 if (needsInitialization) ...[
                   const SizedBox(height: 12),
@@ -416,7 +418,7 @@ class SidebarWithYear extends StatelessWidget {
                     icon: Icons.book_rounded,
                     route: Routes.cours,
                     navVM: navVM,
-                    isEnabled: !needsInitialization, // Désactivé pendant l'init
+                    isEnabled: !needsInitialization,
                     disabledTooltip: "Terminez d'abord la configuration",
                   ),
                   const SizedBox(height: 8),
@@ -436,7 +438,7 @@ class SidebarWithYear extends StatelessWidget {
                     icon: Icons.dashboard_rounded,
                     route: Routes.dashboard,
                     navVM: navVM,
-                    isEnabled: true, // Toujours accessible
+                    isEnabled: true,
                   ),
                 ],
               ),
@@ -558,9 +560,9 @@ class SidebarWithYear extends StatelessWidget {
                     child: Icon(
                       icon,
                       size: 22,
-                      color: isEnabled 
-                        ? (isDanger ? const Color(0xFFFEE2E2) : Colors.white) 
-                        : Colors.white.withOpacity(0.4),
+                      color: isEnabled
+                          ? (isDanger ? const Color(0xFFFEE2E2) : Colors.white)
+                          : Colors.white.withOpacity(0.4),
                     ),
                   ),
                   const SizedBox(width: 14),

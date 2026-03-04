@@ -2,210 +2,132 @@
   {
     "ues": [
       {
-        "ue_name": "Fondamentaux de l'Informatique",
-        "total_hours": 50,
+        "ue_name": "Fondamentaux de l'Informatique et des Systèmes",
+        "total_hours": 40,
         "lessons": [
           {
-            "lesson_name": "Introduction à l'Informatique et son Histoire Moderne",
-            "objective": "Comprendre l'évolution rapide de l'informatique et son impact sur la société contemporaine.",
+            "lesson_name": "Histoire et Évolution des Systèmes Informatiques",
+            "objective": "Comprendre les grandes étapes de l'histoire de l'informatique et les concepts clés qui ont mené aux technologies actuelles.",
             "duration_hours": 4,
             "type": "theorie"
           },
           {
-            "lesson_name": "Architecture des Ordinateurs",
-            "objective": "Identifier les composants matériels clés (CPU, RAM, stockage, bus) et comprendre leur rôle.",
-            "duration_hours": 8,
-            "type": "theorie"
-          },
-          {
-            "lesson_name": "Représentation des Données Numériques",
-            "objective": "Maîtriser les systèmes de numération (binaire, hexadécimal) et le codage des caractères (ASCII, UTF-8).",
+            "lesson_name": "Architecture Matérielle d'un Ordinateur",
+            "objective": "Identifier les composants principaux d'un ordinateur (CPU, RAM, stockage, périphériques) et comprendre leur rôle et fonctionnement de base.",
             "duration_hours": 6,
             "type": "theorie"
           },
           {
-            "lesson_name": "Logique Binaire et Introduction aux Circuits Numériques",
-            "objective": "Acquérir les bases de la logique binaire pour comprendre le fonctionnement interne des ordinateurs.",
-            "duration_hours": 4,
-            "type": "theorie"
-          },
-          {
-            "lesson_name": "Réseaux et Internet (Concepts de Base)",
-            "objective": "Comprendre les principes des réseaux informatiques, les protocoles (TCP/IP) et le fonctionnement d'Internet.",
+            "lesson_name": "Introduction aux Systèmes d'Exploitation Modernes",
+            "objective": "Comprendre le rôle d'un système d'exploitation, ses différents types (Windows, macOS, Linux) et leurs fonctionnalités de base (gestion de processus, mémoire, périphériques).",
             "duration_hours": 8,
             "type": "theorie"
           },
           {
-            "lesson_name": "Introduction à la Cybersécurité",
-            "objective": "Prendre conscience des menaces courantes et adopter les bonnes pratiques de sécurité informatique.",
+            "lesson_name": "Gestion des Fichiers et Dossiers",
+            "objective": "Maîtriser l'organisation, la création, la manipulation (copie, déplacement, suppression) et la recherche de fichiers et de dossiers sur un système d'exploitation graphique.",
             "duration_hours": 6,
-            "type": "theorie"
+            "type": "pratique"
           },
           {
-            "lesson_name": "Atelier de Découverte Matérielle et Logicielle",
-            "objective": "Manipuler et identifier les composants physiques d'un ordinateur et explorer les outils de diagnostic.",
+            "lesson_name": "Ligne de Commande (CLI) : Bases",
+            "objective": "S'initier aux commandes de base d'une interface en ligne de commande (ex: Bash pour Linux/macOS, PowerShell pour Windows) pour la navigation, la manipulation de fichiers et l'exécution de programmes.",
             "duration_hours": 8,
             "type": "pratique"
           },
           {
-            "lesson_name": "Synthèse et Évaluation des Fondamentaux",
-            "objective": "Récapituler les concepts clés et évaluer la compréhension générale des bases de l'informatique.",
-            "duration_hours": 6,
+            "lesson_name": "Réseaux et Concepts de Base d'Internet",
+            "objective": "Comprendre les principes fondamentaux des réseaux informatiques (LAN, WAN, Internet), les protocoles de communication (TCP/IP) et les services essentiels du web.",
+            "duration_hours": 8,
             "type": "theorie"
           }
         ]
       },
       {
-        "ue_name": "Systèmes d'Exploitation et Gestion de Fichiers",
+        "ue_name": "Introduction à la Programmation (Python)",
         "total_hours": 50,
         "lessons": [
           {
-            "lesson_name": "Concepts des Systèmes d'Exploitation Modernes",
-            "objective": "Comprendre le rôle, les fonctions principales et les types de systèmes d'exploitation (Windows, macOS, Linux).",
-            "duration_hours": 6,
-            "type": "theorie"
-          },
-          {
-            "lesson_name": "Structure et Organisation des Systèmes de Fichiers",
-            "objective": "Appréhender les différentes structures de fichiers, les hiérarchies et la gestion des permissions.",
-            "duration_hours": 6,
-            "type": "theorie"
-          },
-          {
-            "lesson_name": "Gestion de Fichiers et Dossiers via Interface Graphique",
-            "objective": "Maîtriser l'utilisation de l'explorateur de fichiers pour organiser, rechercher et manipuler les données.",
-            "duration_hours": 8,
-            "type": "pratique"
-          },
-          {
-            "lesson_name": "Introduction à la Ligne de Commande (Shell)",
-            "objective": "Apprendre les commandes de base pour naviguer, créer, modifier et supprimer des fichiers/dossiers dans un terminal.",
-            "duration_hours": 12,
-            "type": "pratique"
-          },
-          {
-            "lesson_name": "Gestion des Utilisateurs et des Droits d'Accès",
-            "objective": "Comprendre et appliquer les principes de gestion des utilisateurs, des groupes et des permissions sur un OS.",
-            "duration_hours": 6,
-            "type": "pratique"
-          },
-          {
-            "lesson_name": "Introduction à la Virtualisation et Conteneurisation",
-            "objective": "Découvrir les concepts de virtualisation (VM) et de conteneurisation (Docker) et leurs applications.",
-            "duration_hours": 6,
-            "type": "theorie"
-          },
-          {
-            "lesson_name": "Dépannage de Base et Outils Système",
-            "objective": "Utiliser les outils intégrés des OS pour diagnostiquer et résoudre des problèmes courants.",
-            "duration_hours": 6,
-            "type": "pratique"
-          }
-        ]
-      },
-      {
-        "ue_name": "Introduction à la Programmation (avec Python)",
-        "total_hours": 60,
-        "lessons": [
-          {
-            "lesson_name": "Pensée Algorithmique et Résolution de Problèmes",
-            "objective": "Développer une approche logique pour décomposer les problèmes et concevoir des algorithmes.",
-            "duration_hours": 6,
-            "type": "theorie"
-          },
-          {
-            "lesson_name": "Environnement de Développement Python",
-            "objective": "Installer Python, configurer un IDE et exécuter des scripts de base.",
+            "lesson_name": "Premiers Pas avec Python et Environnement de Développement",
+            "objective": "Installer Python, configurer un environnement de développement intégré (IDE) et écrire un premier programme simple ('Hello World').",
             "duration_hours": 6,
             "type": "pratique"
           },
           {
             "lesson_name": "Variables, Types de Données et Opérateurs",
-            "objective": "Maîtriser la déclaration et la manipulation des variables, des types de données primitifs et des opérateurs.",
+            "objective": "Déclarer et manipuler différents types de variables (nombres, chaînes de caractères, booléens) et utiliser les opérateurs arithmétiques, relationnels et logiques.",
+            "duration_hours": 8,
+            "type": "theorie"
+          },
+          {
+            "lesson_name": "Structures Conditionnelles",
+            "objective": "Implémenter des logiques de décision et des chemins d'exécution alternatifs avec les instructions 'if', 'elif' et 'else'.",
+            "duration_hours": 6,
+            "type": "pratique"
+          },
+          {
+            "lesson_name": "Boucles et Itérations",
+            "objective": "Utiliser les boucles 'for' et 'while' pour répéter des blocs de code et parcourir des collections de données.",
             "duration_hours": 8,
             "type": "pratique"
           },
           {
-            "lesson_name": "Structures de Contrôle: Conditions",
-            "objective": "Implémenter des logiques conditionnelles (if, elif, else) pour des exécutions sélectives.",
+            "lesson_name": "Fonctions et Modularité",
+            "objective": "Définir et appeler des fonctions pour organiser le code, améliorer sa lisibilité et le rendre réutilisable, en comprenant les concepts de paramètres et de valeurs de retour.",
             "duration_hours": 8,
-            "type": "pratique"
+            "type": "theorie"
           },
           {
-            "lesson_name": "Structures de Contrôle: Boucles",
-            "objective": "Utiliser les boucles (for, while) pour automatiser des tâches répétitives.",
-            "duration_hours": 8,
-            "type": "pratique"
-          },
-          {
-            "lesson_name": "Collections de Données",
-            "objective": "Manipuler les listes, tuples, dictionnaires et ensembles pour organiser des collections d'informations.",
-            "duration_hours": 8,
-            "type": "pratique"
-          },
-          {
-            "lesson_name": "Fonctions et Modularité du Code",
-            "objective": "Créer et utiliser des fonctions pour structurer le code, améliorer sa lisibilité et sa réutilisation.",
+            "lesson_name": "Structures de Données Simples (Listes, Tuples, Dictionnaires)",
+            "objective": "Utiliser les structures de données fondamentales de Python (listes, tuples, dictionnaires) pour stocker, organiser et manipuler des collections de données.",
             "duration_hours": 8,
             "type": "pratique"
           },
           {
             "lesson_name": "Gestion des Erreurs et Débogage",
-            "objective": "Apprendre à identifier, gérer les erreurs (try-except) et déboguer le code Python.",
-            "duration_hours": 4,
+            "objective": "Identifier et corriger les erreurs de programmation (syntaxe, exécution) à l'aide de techniques de débogage et de la gestion d'exceptions ('try-except').",
+            "duration_hours": 6,
             "type": "pratique"
-          },
-          {
-            "lesson_name": "Mini-Projet de Programmation",
-            "objective": "Appliquer l'ensemble des concepts appris pour réaliser une petite application fonctionnelle.",
-            "duration_hours": 4,
-            "type": "projet"
           }
         ]
       },
       {
         "ue_name": "Outils Collaboratifs et Culture Numérique",
-        "total_hours": 50,
+        "total_hours": 40,
         "lessons": [
           {
-            "lesson_name": "Traitement de Texte Avancé",
-            "objective": "Maîtriser les fonctionnalités avancées des traitements de texte (styles, table des matières, publipostage) avec des outils modernes.",
-            "duration_hours": 10,
+            "lesson_name": "Maîtrise des Suites Bureautiques Modernes (Traitement de Texte)",
+            "objective": "Utiliser les fonctionnalités avancées d'un logiciel de traitement de texte (ex: Microsoft Word, Google Docs) pour créer, formater et réviser des documents professionnels.",
+            "duration_hours": 8,
             "type": "pratique"
           },
           {
-            "lesson_name": "Tableur pour l'Analyse de Données",
-            "objective": "Utiliser des fonctions complexes, des graphiques et des tableaux croisés dynamiques pour l'analyse et la présentation de données.",
-            "duration_hours": 12,
+            "lesson_name": "Maîtrise des Suites Bureautiques Modernes (Tableur)",
+            "objective": "Utiliser les fonctionnalités avancées d'un tableur (ex: Microsoft Excel, Google Sheets) pour saisir, organiser, analyser des données et créer des graphiques pertinents.",
+            "duration_hours": 8,
             "type": "pratique"
           },
           {
-            "lesson_name": "Conception de Présentations Impactantes",
-            "objective": "Créer des présentations visuellement attrayantes et efficaces intégrant divers médias et techniques d'animation.",
+            "lesson_name": "Présentations Multimédia et Outils Visuels",
+            "objective": "Concevoir et réaliser des présentations efficaces et visuellement attrayantes avec un logiciel dédié (ex: Microsoft PowerPoint, Google Slides) ou des outils de création graphique simples.",
             "duration_hours": 6,
             "type": "pratique"
           },
           {
             "lesson_name": "Communication et Collaboration en Ligne",
-            "objective": "Utiliser efficacement les outils de communication (e-mail, messagerie instantanée, visioconférence) et de gestion de projet collaboratifs.",
+            "objective": "Maîtriser les outils de communication (courrier électronique, messagerie instantanée) et les plateformes de collaboration en ligne (visioconférence, partage de documents, gestion de projet).",
             "duration_hours": 8,
             "type": "pratique"
           },
           {
-            "lesson_name": "Stockage, Partage et Sécurité dans le Cloud",
-            "objective": "Gérer des documents et des fichiers en ligne via les plateformes cloud, en respectant les principes de sécurité et de partage.",
+            "lesson_name": "Recherche d'Information et Évaluation Critique sur le Web",
+            "objective": "Développer des stratégies de recherche efficaces sur le web, évaluer la fiabilité des sources d'information et comprendre les bases du fonctionnement des moteurs de recherche.",
             "duration_hours": 6,
-            "type": "pratique"
+            "type": "theorie"
           },
           {
-            "lesson_name": "Recherche d'Information et Veille Numérique",
-            "objective": "Développer des compétences en recherche d'information avancée, évaluation de la fiabilité des sources et veille thématique.",
-            "duration_hours": 4,
-            "type": "pratique"
-          },
-          {
-            "lesson_name": "Citoyenneté Numérique et E-Réputation",
-            "objective": "Comprendre les enjeux de l'identité numérique, de la protection des données personnelles et adopter une conduite éthique en ligne.",
+            "lesson_name": "Bases de la Sécurité Numérique et Cyberhygiène",
+            "objective": "Comprendre les risques courants de la vie numérique (phishing, logiciels malveillants, arnaques en ligne) et adopter des bonnes pratiques pour protéger ses données personnelles et sa vie privée.",
             "duration_hours": 4,
             "type": "theorie"
           }
@@ -216,67 +138,55 @@
   {
     "ues": [
       {
-        "ue_name": "Fondamentaux HTML5 & CSS3",
-        "total_hours": 25,
+        "ue_name": "Introduction au Développement Web Statique",
+        "total_hours": 32,
         "lessons": [
           {
-            "lesson_name": "Introduction au Développement Web et HTML5",
-            "objective": "Comprendre les principes fondamentaux du Web, l'architecture client-serveur et la structure de base d'une page HTML5.",
-            "duration_hours": 3,
+            "lesson_name": "Fondamentaux du Web et d'HTML",
+            "objective": "Comprendre l'architecture du web, le rôle d'HTML et structurer une page web simple avec les balises de base (<html>, <head>, <body>, titres, paragraphes, liens, images).",
+            "duration_hours": 6,
             "type": "theorie"
           },
           {
-            "lesson_name": "Structure Sémantique HTML5",
-            "objective": "Maîtriser l'utilisation des balises HTML5 pour structurer le contenu de manière sémantique (header, nav, main, article, section, footer, div, span).",
-            "duration_hours": 5,
-            "type": "theorie/pratique"
+            "lesson_name": "Structuration Sémantique avec HTML5",
+            "objective": "Utiliser les éléments sémantiques d'HTML5 (<header>, <nav>, <main>, <section>, <article>, <footer>, <aside>), les listes et les tableaux pour une organisation logique et accessible du contenu.",
+            "duration_hours": 8,
+            "type": "pratique"
           },
           {
-            "lesson_name": "Contenu Texte, Liens et Images",
-            "objective": "Insérer et organiser du texte, créer des liens hypertextes et intégrer des images de manière accessible et optimisée.",
-            "duration_hours": 4,
-            "type": "theorie/pratique"
+            "lesson_name": "Introduction aux Feuilles de Style en Cascade (CSS3)",
+            "objective": "Appliquer des styles visuels aux documents HTML en utilisant CSS3, maîtriser les sélecteurs de base (type, classe, ID) et les propriétés de texte, couleur et fond.",
+            "duration_hours": 10,
+            "type": "theorie"
           },
           {
-            "lesson_name": "Tableaux et Formulaires Interactifs HTML",
-            "objective": "Concevoir et implémenter des tableaux de données et des formulaires HTML robustes et accessibles pour la collecte d'informations.",
-            "duration_hours": 5,
-            "type": "theorie/pratique"
-          },
-          {
-            "lesson_name": "Introduction à CSS3 : Style et Sélecteurs",
-            "objective": "Appliquer les bases de CSS3 pour styliser les pages HTML, comprendre les sélecteurs, les propriétés de texte et les couleurs.",
-            "duration_hours": 4,
-            "type": "theorie/pratique"
-          },
-          {
-            "lesson_name": "Modèle de Boîte et Positionnement CSS",
-            "objective": "Maîtriser le modèle de boîte CSS (margin, border, padding) et les techniques de base pour le positionnement des éléments (display, position, float).",
-            "duration_hours": 4,
-            "type": "theorie/pratique"
+            "lesson_name": "Modèle de Boîte et Agencement CSS",
+            "objective": "Maîtriser le modèle de boîte CSS (margin, border, padding, content) et les propriétés d'affichage (display, float, positionnement basique) pour l'agencement des éléments sur une page.",
+            "duration_hours": 8,
+            "type": "pratique"
           }
         ]
       },
       {
-        "ue_name": "Projet de Développement Web Statique",
+        "ue_name": "Projet de Conception de Site Web Statique",
         "total_hours": 20,
         "lessons": [
           {
-            "lesson_name": "Conception et Planification du Projet Web",
-            "objective": "Analyser les spécifications fonctionnelles et techniques, puis concevoir l'architecture d'un site web statique simple.",
+            "lesson_name": "Analyse des Besoins et Conception Maquette",
+            "objective": "Définir le cahier des charges d'un mini-site web statique, créer des maquettes (wireframes) et concevoir son arborescence.",
             "duration_hours": 4,
             "type": "projet"
           },
           {
-            "lesson_name": "Implémentation de la Structure HTML5 du Site",
-            "objective": "Développer la structure HTML5 sémantique du site en respectant les bonnes pratiques et l'accessibilité.",
-            "duration_hours": 8,
+            "lesson_name": "Développement et Intégration HTML/CSS du Projet",
+            "objective": "Appliquer les connaissances d'HTML5 et CSS3 pour développer un mini-site web statique complet, multi-pages, respectant les bonnes pratiques d'intégration.",
+            "duration_hours": 12,
             "type": "projet"
           },
           {
-            "lesson_name": "Stylisation et Mise en Page avec CSS3",
-            "objective": "Appliquer les styles CSS3 pour la mise en forme graphique, l'agencement et la responsivité du site.",
-            "duration_hours": 8,
+            "lesson_name": "Test, Débogage et Présentation Finale du Projet",
+            "objective": "Tester la conformité du site aux spécifications, corriger les anomalies et présenter oralement le projet achevé et les choix techniques effectués.",
+            "duration_hours": 4,
             "type": "projet"
           }
         ]
